@@ -22,16 +22,25 @@ const bucketSlug = import.meta.env.COSMIC_BUCKET_SLUG as string;
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <script src="/dashboard-console-capture.js" is:inline></script>
   </head>
-  <body class="min-h-screen flex flex-col bg-gray-50">
-    <Navigation />
-    <main class="flex-grow">
-      <slot />
-    </main>
-    <Footer />
-    <CosmicBadge bucketSlug={bucketSlug} />
+  <body class="min-h-screen flex flex-col bg-gradient-to-br from-secondary-900 via-secondary-800 to-secondary-900">
+    <!-- Animated gradient mesh background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 4s;"></div>
+    </div>
+    
+    <div class="relative z-10">
+      <Navigation />
+      <main class="flex-grow">
+        <slot />
+      </main>
+      <Footer />
+      <CosmicBadge bucketSlug={bucketSlug} />
+    </div>
   </body>
 </html>
 
@@ -44,11 +53,51 @@ const bucketSlug = import.meta.env.COSMIC_BUCKET_SLUG as string;
 
   html {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Glass morphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #0EA5E9 0%, #A855F7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #0EA5E9 0%, #A855F7 100%);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0284c7 0%, #9333ea 100%);
   }
 </style>

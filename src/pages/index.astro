@@ -11,86 +11,102 @@ const caseStudies = await getCaseStudies() as CaseStudy[];
 ---
 
 <Layout title="MVisible TechCos - Virtual Chief Mobility Officer Solutions">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  <!-- Hero Section with Animated Gradient -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-600/20 via-accent-600/20 to-primary-600/20 animate-gradient"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          Your Virtual Chief Mobility Officer
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          Your Virtual
+          <span class="gradient-text block mt-2">Chief Mobility Officer</span>
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-primary-100">
+        <p class="text-xl md:text-2xl mb-10 text-gray-300">
           Expert guidance for wireless procurement and technology sourcing without the full-time overhead
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="/services"
-            class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-50 transition-colors"
+            class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-xl shadow-primary-500/50"
           >
-            Explore Services
+            <span class="relative z-10">Explore Services</span>
+            <svg class="ml-2 w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+            <div class="absolute inset-0 bg-gradient-to-r from-accent-500 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
             href="#contact"
-            class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-700 transition-colors"
+            class="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white glass rounded-xl transform hover:scale-105 transition-all duration-300 hover:bg-white/20"
           >
             Get Started
+            <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
         </div>
       </div>
     </div>
+
+    <!-- Floating elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-primary-500/20 rounded-full blur-xl animate-float"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-accent-500/20 rounded-full blur-xl animate-float" style="animation-delay: 2s;"></div>
   </section>
 
-  <!-- Value Proposition -->
-  <section class="py-16 bg-white">
+  <!-- Value Proposition with Glass Cards -->
+  <section class="py-20 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Why Choose MVisible TechCos?
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          Why Choose <span class="gradient-text">MVisible TechCos</span>?
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
           We bring C-level mobility expertise to mid-sized companies, delivering measurable cost savings and strategic technology guidance.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="glass-dark rounded-2xl p-8 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Average 20-35% Cost Savings</h3>
-          <p class="text-gray-600">Reduce wireless and telecom expenses through expert negotiation and optimization.</p>
+          <h3 class="text-2xl font-bold text-white mb-3 text-center">20-35% Cost Savings</h3>
+          <p class="text-gray-300 text-center">Reduce wireless and telecom expenses through expert negotiation and optimization.</p>
         </div>
 
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="glass-dark rounded-2xl p-8 transform hover:scale-105 hover:shadow-2xl hover:shadow-accent-500/20 transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Proven Expertise</h3>
-          <p class="text-gray-600">Decades of combined experience in enterprise mobility and telecommunications.</p>
+          <h3 class="text-2xl font-bold text-white mb-3 text-center">Proven Expertise</h3>
+          <p class="text-gray-300 text-center">Decades of combined experience in enterprise mobility and telecommunications.</p>
         </div>
 
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="glass-dark rounded-2xl p-8 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Rapid Implementation</h3>
-          <p class="text-gray-600">Get started quickly without lengthy hiring processes or onboarding delays.</p>
+          <h3 class="text-2xl font-bold text-white mb-3 text-center">Rapid Implementation</h3>
+          <p class="text-gray-300 text-center">Get started quickly without lengthy hiring processes or onboarding delays.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Services Section -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-20 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          Our <span class="gradient-text">Services</span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
           Comprehensive mobility solutions tailored to your organization's needs
         </p>
       </div>
@@ -102,17 +118,20 @@ const caseStudies = await getCaseStudies() as CaseStudy[];
           ))}
         </div>
       ) : (
-        <div class="text-center py-12">
-          <p class="text-gray-500">No services available at the moment.</p>
+        <div class="text-center py-12 glass-dark rounded-2xl">
+          <p class="text-gray-400">No services available at the moment.</p>
         </div>
       )}
 
       <div class="text-center mt-12">
         <a
           href="/services"
-          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          class="inline-flex items-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-xl shadow-primary-500/30"
         >
           View All Services
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
         </a>
       </div>
     </div>
@@ -120,11 +139,13 @@ const caseStudies = await getCaseStudies() as CaseStudy[];
 
   <!-- Case Studies Section -->
   {caseStudies.length > 0 && (
-    <section class="py-16 bg-white">
+    <section class="py-20 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Client Success Stories</h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+            Client <span class="gradient-text">Success Stories</span>
+          </h2>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
             See how we've helped organizations achieve significant cost savings and operational improvements
           </p>
         </div>
@@ -138,9 +159,12 @@ const caseStudies = await getCaseStudies() as CaseStudy[];
         <div class="text-center mt-12">
           <a
             href="/case-studies"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+            class="inline-flex items-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-accent-500 to-primary-500 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-xl shadow-accent-500/30"
           >
             View All Case Studies
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
         </div>
       </div>
@@ -148,20 +172,25 @@ const caseStudies = await getCaseStudies() as CaseStudy[];
   )}
 
   <!-- CTA Section -->
-  <section class="py-16 bg-primary-600 text-white">
+  <section class="py-20 relative">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6">
-        Ready to Optimize Your Mobility Strategy?
-      </h2>
-      <p class="text-xl mb-8 text-primary-100">
-        Let's discuss how we can help reduce costs and improve your wireless infrastructure.
-      </p>
-      <a
-        href="#contact"
-        class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-50 transition-colors"
-      >
-        Schedule a Consultation
-      </a>
+      <div class="glass-dark rounded-3xl p-12 transform hover:scale-[1.02] transition-transform duration-300">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          Ready to Optimize Your <span class="gradient-text">Mobility Strategy</span>?
+        </h2>
+        <p class="text-xl mb-10 text-gray-300">
+          Let's discuss how we can help reduce costs and improve your wireless infrastructure.
+        </p>
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center px-10 py-4 text-lg font-semibold text-white bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-primary-500/50"
+        >
+          Schedule a Consultation
+          <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
