@@ -1,0 +1,134 @@
+---
+// src/pages/case-studies/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import { getCaseStudies, getCaseStudy } from '../../lib/cosmic';
+import type { CaseStudy } from '../../types';
+
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map(study => ({
+    params: { slug: study.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const caseStudy = await getCaseStudy(slug as string) as CaseStudy | null;
+
+if (!caseStudy) {
+  return Astro.redirect('/404');
+}
+
+const imageUrl = caseStudy.metadata?.featured_image?.imgix_url;
+const industry = caseStudy.metadata?.industry;
+const costSavings = caseStudy.metadata?.cost_savings;
+const relatedServices = caseStudy.metadata?.related_services || [];
+---
+
+<Layout title={`${caseStudy.title} - MVisible TechCos`} description={`Case study: ${caseStudy.metadata?.client_name}`}>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="flex items-center space-x-4 mb-4">
+          {industry && (
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white text-primary-800">
+              {industry}
+            </span>
+          )}
+          {costSavings && (
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-green-500 text-white">
+              {costSavings}
+            </span>
+          )}
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{caseStudy.title}</h1>
+        <p class="text-xl text-primary-100">{caseStudy.metadata?.client_name}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          {imageUrl && (
+            <div class="mb-12 rounded-lg overflow-hidden shadow-lg">
+              <img
+                src={`${imageUrl}?w=1600&h=800&fit=crop&auto=format,compress`}
+                alt={caseStudy.title}
+                class="w-full h-auto"
+                width="800"
+                height="400"
+              />
+            </div>
+          )}
+
+          <div class="space-y-12">
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
+              <div class="prose prose-lg max-w-none" set:html={caseStudy.metadata?.challenge} />
+            </div>
+
+            <div class="bg-primary-50 rounded-lg p-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Solution</h2>
+              <div class="prose prose-lg max-w-none" set:html={caseStudy.metadata?.solution} />
+            </div>
+
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">The Results</h2>
+              <div class="prose prose-lg max-w-none" set:html={caseStudy.metadata?.results} />
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1">
+          {relatedServices.length > 0 && (
+            <div class="bg-gray-50 rounded-lg p-8 mb-8">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">Related Services</h3>
+              <div class="space-y-4">
+                {relatedServices.map(service => (
+                  <a
+                    href={`/services/${service.slug}`}
+                    class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all"
+                  >
+                    <h4 class="font-semibold text-gray-900 mb-1">
+                      {service.metadata?.service_name || service.title}
+                    </h4>
+                    <p class="text-sm text-gray-600">Learn more →</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="bg-primary-600 text-white rounded-lg p-8 sticky top-24">
+            <h3 class="text-2xl font-bold mb-4">Get Similar Results</h3>
+            <p class="mb-6">
+              Ready to achieve cost savings and operational improvements like this?
+            </p>
+            <a
+              href="#contact"
+              class="block w-full text-center px-6 py-3 bg-white text-primary-600 font-medium rounded-md hover:bg-gray-50 transition-colors"
+            >
+              Schedule Consultation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Case Studies -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Explore More Success Stories</h2>
+      <a
+        href="/case-studies"
+        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+      >
+        View All Case Studies
+      </a>
+    </div>
+  </section>
+</Layout>

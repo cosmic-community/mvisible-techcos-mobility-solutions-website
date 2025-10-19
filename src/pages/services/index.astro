@@ -1,0 +1,65 @@
+---
+// src/pages/services/index.astro
+import Layout from '../../layouts/Layout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { getServices } from '../../lib/cosmic';
+import type { Service } from '../../types';
+
+const services = await getServices() as Service[];
+---
+
+<Layout 
+  title="Services - MVisible TechCos"
+  description="Comprehensive virtual CMO and mobility solutions for enterprise organizations"
+>
+  <!-- Header -->
+  <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
+        <p class="text-xl text-primary-100">
+          Expert mobility solutions tailored to your organization's unique needs
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {services.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map(service => (
+            <ServiceCard service={service} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-white rounded-lg shadow-sm">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">No services yet</h3>
+          <p class="mt-1 text-sm text-gray-500">Services will appear here once added to your Cosmic bucket.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Not Sure Which Service Is Right for You?
+      </h2>
+      <p class="text-xl text-gray-600 mb-8">
+        Let's discuss your specific challenges and find the best solution for your organization.
+      </p>
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+      >
+        Schedule a Free Consultation
+      </a>
+    </div>
+  </section>
+</Layout>

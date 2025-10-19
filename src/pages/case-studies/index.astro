@@ -1,0 +1,90 @@
+---
+// src/pages/case-studies/index.astro
+import Layout from '../../layouts/Layout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getCaseStudies } from '../../lib/cosmic';
+import type { CaseStudy } from '../../types';
+
+const caseStudies = await getCaseStudies() as CaseStudy[];
+---
+
+<Layout 
+  title="Case Studies - MVisible TechCos"
+  description="Real client success stories showcasing measurable results and cost savings"
+>
+  <!-- Header -->
+  <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Client Success Stories</h1>
+        <p class="text-xl text-primary-100">
+          Discover how we've helped organizations achieve significant cost savings and operational excellence
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {caseStudies.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {caseStudies.map(caseStudy => (
+            <CaseStudyCard caseStudy={caseStudy} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-white rounded-lg shadow-sm">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">No case studies yet</h3>
+          <p class="mt-1 text-sm text-gray-500">Case studies will appear here once added to your Cosmic bucket.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Impact</h2>
+        <p class="text-xl text-gray-600">Delivering measurable results for our clients</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-6 bg-primary-50 rounded-lg">
+          <div class="text-4xl font-bold text-primary-600 mb-2">20-35%</div>
+          <div class="text-gray-700">Average Cost Savings</div>
+        </div>
+        <div class="text-center p-6 bg-primary-50 rounded-lg">
+          <div class="text-4xl font-bold text-primary-600 mb-2">100+</div>
+          <div class="text-gray-700">Successful Projects</div>
+        </div>
+        <div class="text-center p-6 bg-primary-50 rounded-lg">
+          <div class="text-4xl font-bold text-primary-600 mb-2">99%</div>
+          <div class="text-gray-700">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Ready to Achieve Similar Results?
+      </h2>
+      <p class="text-xl text-gray-600 mb-8">
+        Let's discuss how we can help optimize your mobility strategy and reduce costs.
+      </p>
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+      >
+        Get Your Free Assessment
+      </a>
+    </div>
+  </section>
+</Layout>

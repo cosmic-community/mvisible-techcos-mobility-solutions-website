@@ -1,0 +1,117 @@
+---
+// src/pages/resources/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { getResources } from '../../lib/cosmic';
+import type { Resource } from '../../types';
+
+const resources = await getResources() as Resource[];
+---
+
+<Layout 
+  title="Resources - MVisible TechCos"
+  description="Whitepapers, guides, and insights on mobility strategy and wireless procurement"
+>
+  <!-- Header -->
+  <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Resources & Insights</h1>
+        <p class="text-xl text-primary-100">
+          Expert guidance and best practices for enterprise mobility strategy
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {resources.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {resources.map(resource => {
+            const imageUrl = resource.metadata?.featured_image?.imgix_url;
+            const resourceType = resource.metadata?.resource_type?.value || 'Resource';
+            const publishedDate = resource.metadata?.published_date;
+
+            return (
+              <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                {imageUrl && (
+                  <div class="relative h-48 overflow-hidden">
+                    <img
+                      src={`${imageUrl}?w=800&h=400&fit=crop&auto=format,compress`}
+                      alt={resource.metadata?.title || resource.title}
+                      class="w-full h-full object-cover"
+                      width="400"
+                      height="200"
+                    />
+                    <div class="absolute top-4 left-4">
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                        {resourceType}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                
+                <div class="p-6">
+                  <h3 class="text-xl font-bold text-gray-900 mb-3">
+                    {resource.metadata?.title || resource.title}
+                  </h3>
+                  
+                  {publishedDate && (
+                    <p class="text-sm text-gray-500 mb-4">
+                      {new Date(publishedDate).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </p>
+                  )}
+                  
+                  {resource.metadata?.download_file && (
+                    <a
+                      href={resource.metadata.download_file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                    >
+                      Download
+                      <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-white rounded-lg shadow-sm">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">Coming Soon</h3>
+          <p class="mt-1 text-sm text-gray-500">Check back soon for valuable resources and insights.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Stay Informed
+      </h2>
+      <p class="text-xl text-gray-600 mb-8">
+        Subscribe to receive the latest insights on mobility strategy and cost optimization.
+      </p>
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,60 @@
+---
+// src/components/CaseStudyCard.astro
+import type { CaseStudy } from '../types';
+
+export interface Props {
+  caseStudy: CaseStudy;
+}
+
+const { caseStudy } = Astro.props;
+const imageUrl = caseStudy.metadata?.featured_image?.imgix_url;
+const industry = caseStudy.metadata?.industry;
+const costSavings = caseStudy.metadata?.cost_savings;
+---
+
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  {imageUrl && (
+    <div class="relative h-48 overflow-hidden">
+      <img
+        src={`${imageUrl}?w=800&h=400&fit=crop&auto=format,compress`}
+        alt={caseStudy.title}
+        class="w-full h-full object-cover"
+        width="400"
+        height="200"
+      />
+      {costSavings && (
+        <div class="absolute top-4 right-4">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white">
+            {costSavings}
+          </span>
+        </div>
+      )}
+    </div>
+  )}
+  
+  <div class="p-6">
+    {industry && (
+      <div class="mb-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+          {industry}
+        </span>
+      </div>
+    )}
+    
+    <h3 class="text-xl font-bold text-gray-900 mb-2">{caseStudy.title}</h3>
+    
+    <p class="text-gray-600 mb-4">
+      {caseStudy.metadata?.client_name}
+    </p>
+    
+    <a
+      href={`/case-studies/${caseStudy.slug}`}
+      class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+    >
+      Read Case Study
+      <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>
