@@ -1,12 +1,12 @@
----
 // src/pages/services/[slug].astro
+---
 import Layout from '../../layouts/Layout.astro';
 import { getServices, getService } from '../../lib/cosmic';
 import type { Service } from '../../types';
 
 export async function getStaticPaths() {
   const services = await getServices();
-  return services.map(service => ({
+  return services.map((service: Service) => ({
     params: { slug: service.slug },
   }));
 }

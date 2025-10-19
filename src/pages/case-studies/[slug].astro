@@ -1,12 +1,12 @@
----
 // src/pages/case-studies/[slug].astro
+---
 import Layout from '../../layouts/Layout.astro';
 import { getCaseStudies, getCaseStudy } from '../../lib/cosmic';
 import type { CaseStudy } from '../../types';
 
 export async function getStaticPaths() {
   const caseStudies = await getCaseStudies();
-  return caseStudies.map(study => ({
+  return caseStudies.map((study: CaseStudy) => ({
     params: { slug: study.slug },
   }));
 }
