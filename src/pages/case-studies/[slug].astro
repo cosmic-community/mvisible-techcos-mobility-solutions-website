@@ -1,5 +1,5 @@
-// src/pages/case-studies/[slug].astro
 ---
+// src/pages/case-studies/[slug].astro
 import Layout from '../../layouts/Layout.astro';
 import { getCaseStudies, getCaseStudy } from '../../lib/cosmic';
 import type { CaseStudy } from '../../types';
@@ -11,8 +11,8 @@ export async function getStaticPaths() {
   }));
 }
 
-const { slug } = Astro.params;
-const caseStudy = await getCaseStudy(slug as string) as CaseStudy | null;
+const { slug } = Astro.params as { slug: string };
+const caseStudy = await getCaseStudy(slug);
 
 if (!caseStudy) {
   return Astro.redirect('/404');
@@ -87,7 +87,7 @@ const relatedServices = caseStudy.metadata?.related_services || [];
             <div class="bg-gray-50 rounded-lg p-8 mb-8">
               <h3 class="text-2xl font-bold text-gray-900 mb-6">Related Services</h3>
               <div class="space-y-4">
-                {relatedServices.map(service => (
+                {relatedServices.map((service: any) => (
                   <a
                     href={`/services/${service.slug}`}
                     class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all"

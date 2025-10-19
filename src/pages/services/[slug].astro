@@ -1,5 +1,5 @@
-// src/pages/services/[slug].astro
 ---
+// src/pages/services/[slug].astro
 import Layout from '../../layouts/Layout.astro';
 import { getServices, getService } from '../../lib/cosmic';
 import type { Service } from '../../types';
@@ -11,8 +11,8 @@ export async function getStaticPaths() {
   }));
 }
 
-const { slug } = Astro.params;
-const service = await getService(slug as string) as Service | null;
+const { slug } = Astro.params as { slug: string };
+const service = await getService(slug);
 
 if (!service) {
   return Astro.redirect('/404');
